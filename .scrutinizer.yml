@@ -1,19 +1,32 @@
 filter:
-    excluded_paths:
-        - "tests/*"
+  excluded_paths:
+    - "tests/*"
+
 checks:
-    php: true
+  php:
+    code_rating: true
+    
+tools:
+  external_code_coverage:
+    timeout: 1200
+    runs: 3
+  php_code_coverage: true
+
 build:
-    environment:
-            php:
-                version: 7.4
-    dependencies:
-        before:
-            - composer install
-    tests:
-        override:
-            -
-                command: vendor/bin/phpunit --coverage-clover=clover.xml
-                coverage:
-                    file: clover.xml
-                    format: php-clover
+
+  environment:
+    timezone: "Asia/Tokyo"
+    php:
+      version: 7.4
+
+  dependencies:
+    before:
+      - composer install
+      
+  tests:
+    override:
+      -
+        command: 'vendor/bin/phpunit --coverage-clover=clover.xml'
+        coverage:
+          file: 'clover.xml'
+          format: 'clover'
