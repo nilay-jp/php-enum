@@ -1,0 +1,34 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: circleci/php:7.4-node-browsers
+
+    steps:
+      - checkout
+
+      - run: sudo apt update
+      - run: sudo apt-get install -y libpng-dev
+      - run: sudo docker-php-ext-install zip gd
+      - run: composer install -n --prefer-dist
+      
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+      - restore_cache:
+          keys:
+            - node-v1-{{ checksum "package-lock.json" }}
+      
+      - run: php -d memory_limit=4G ./vendor/bin/phpstan analyse
+      
+      - run: ./vendor/bin/phpunit --coverage-html /tmp/coverage
+      - store_artifacts:
+          path: /tmp/coverage
+          destination: coverage
+          
+workflows:
+  test_application:
+    jobs:
+       - test

@@ -1,4 +1,7 @@
 # php-enum
+
+[![<nilay-jp>](https://circleci.com/gh/nilay-jp/php-enum.svg?style=shield)](<https://circleci.com/gh/nilay-jp/php-enum>)
+
 Enum implementation for PHP.
 
 ## Example
