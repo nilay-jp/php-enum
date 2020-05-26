@@ -1,6 +1,5 @@
 checks:
   php: true
-
 coding_style:
   php:
     spaces:
@@ -8,14 +7,12 @@ coding_style:
         closure_definition: true
       around_operators:
         concatenation: true
-
 build:
   nodes:
     analysis:
       tests:
         override:
           - php-scrutinizer-run
-
 tools:
   external_code_coverage:
     timeout: 600
