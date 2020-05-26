@@ -1,0 +1,44 @@
+{
+    "name": "nilay-jp/php-enum",
+    "description": "Enum implementation for PHP.",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://about.nilay.jp",
+    "support": {
+        "issues": "https://github.com/nilay-jp/php-enum/issues",
+        "source": "https://github.com/nilay-jp/php-enum"
+    },
+    "authors": [{
+        "name": "Nilay",
+        "email": "contact@nilay.jp"
+    }],
+    "require": {
+        "php": "^7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "jp\\nilay\\enum\\": "src/enum/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "jp\\nilay\\enum\\tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --coverage-html coverage",
+        "cs": "vendor/bin/php-cs-fixer fix",
+        "analyze": "vendor/bin/phpstan analyze",
+        "check": "composer cs && composer test && composer analyze"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpstan/phpstan": "^0.12.25",
+        "phpunit/phpunit": "^9.1"
+    }
+}

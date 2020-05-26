@@ -1,0 +1,14 @@
+/composer.lock
+/composer.phar
+/coverage
+/nbproject
+/phpstan.neon
+/phpunit.xml
+/Thumbs.db
+/vendor
+/.DS_Store
+/.idea
+/.php_cs
+/.php_cs.cache
+/.phpunit.result.cache
+/.vscode
