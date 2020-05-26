@@ -1,0 +1,13 @@
+<?php
+
+$finder = PhpCsFixer\Finder::create()
+    ->in("src/enum/")
+    ->in("tests/");
+
+return PhpCsFixer\Config::create()
+    ->setRules([
+        "@PSR2" => true,
+        "@Symfony" => true,
+        "single_quote" => false,
+    ])
+    ->setFinder($finder);
