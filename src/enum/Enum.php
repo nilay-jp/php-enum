@@ -89,8 +89,6 @@ abstract class Enum implements IEnum
 
     /**
      * @param bool $memolizeEnumerators
-     *
-     * @return void
      */
     private static function memorize($memolizeEnumerators = true): void
     {
@@ -128,8 +126,6 @@ abstract class Enum implements IEnum
 
     /**
      * @param string|bool $docComment
-     *
-     * @return bool
      */
     private static function hasEnumAnnotation($docComment): bool
     {
@@ -151,6 +147,10 @@ abstract class Enum implements IEnum
             $info = $matches[1];
             $info = trim($info);
             $info = preg_replace("/^(\*\s+?)/", "", $info);
+
+            if (null === $info) {
+                return false;
+            }
 
             if ("@Enum" === trim($info)) {
                 return true;

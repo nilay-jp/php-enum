@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class EnumTest extends TestCase
 {
-    public function test_name(): void
+    public function testName(): void
     {
         $this->assertSame("EXTRA_HIGH", HeightEx::EXTRA_HIGH()->name());
         $this->assertSame("HIGH", HeightEx::HIGH()->name());
@@ -17,14 +17,14 @@ class EnumTest extends TestCase
         $this->assertSame("EXTRA_LOW", HeightEx::EXTRA_LOW()->name());
     }
 
-    public function test_equals(): void
+    public function testEquals(): void
     {
         $this->assertTrue(HeightEx::EXTRA_HIGH()->equals(HeightEx::EXTRA_HIGH()));
         $this->assertFalse(HeightEx::EXTRA_HIGH()->equals(HeightEx::HIGH()));
         $this->assertFalse(HeightEx::HIGH()->equals(Height::HIGH()));
     }
 
-    public function test_values(): void
+    public function testValues(): void
     {
         $actual = HeightEx::values();
         $expected = [
@@ -41,7 +41,7 @@ class EnumTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function test_valueOf(): void
+    public function testValueOf(): void
     {
         $this->assertEquals(HeightEx::HIGH(), HeightEx::valueOf("HIGH"));
         $this->assertNotEquals(HeightEx::HIGH(), HeightEx::valueOf("MEDIUM"));
@@ -56,13 +56,13 @@ class EnumTest extends TestCase
         $this->assertNotEquals(HeightEx::LOW(), HeightEx::valueOf("MEDIUM"));
     }
 
-    public function test_exeption_badMethod(): void
+    public function testExeptionBadMethod(): void
     {
         $this->expectException(\BadMethodCallException::class);
         $h = HeightEx::BAD_METHOD();
     }
 
-    public function test_exception_valueOf(): void
+    public function testExceptionValueOf(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $h = HeightEx::valueOf("INVALID_NAME");
