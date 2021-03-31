@@ -2,7 +2,10 @@
 
 namespace jp\nilay\enum;
 
-abstract class Enum implements IEnum
+use Attribute;
+
+#[Attribute(Attribute::TARGET_FUNCTION | Attribute::IS_REPEATABLE)]
+class Enum implements IEnum
 {
     /** @var Array<string, Array<string, int>> */
     private static array $methodNameMemo = [];
@@ -11,7 +14,7 @@ abstract class Enum implements IEnum
     private static array $enumMemo = [];
     private int $ordinal;
 
-    protected function __construct()
+    public function __construct()
     {
         $this->init();
     }
@@ -89,8 +92,6 @@ abstract class Enum implements IEnum
 
     /**
      * @param bool $memolizeEnumerators
-     *
-     * @return void
      */
     private static function memorize($memolizeEnumerators = true): void
     {
@@ -107,9 +108,7 @@ abstract class Enum implements IEnum
         $ordinal = 0;
 
         foreach ($reflectionMethods as $reflectionMethod) {
-            $docComment = $reflectionMethod->getDocComment();
-
-            if (!self::hasEnumAnnotation($docComment)) {
+            if (!self::hasEnumAttribute($reflectionMethod)) {
                 continue;
             }
 
@@ -124,35 +123,15 @@ abstract class Enum implements IEnum
                 self::$enumMemo[static::class][$methodName] = static::$methodName();
             }
         }
+        exit;
     }
 
-    /**
-     * @param string|bool $docComment
-     *
-     * @return bool
-     */
-    private static function hasEnumAnnotation($docComment): bool
+    private static function hasEnumAttribute(\ReflectionMethod $method): bool
     {
-        if (!is_string($docComment)) {
-            return false;
-        }
+        $attributes = $method->getAttributes();
 
-        $lines = preg_split("/(\r?\n)/", $docComment);
-
-        if (false === $lines) {
-            return false;
-        }
-
-        foreach ($lines as $line) {
-            if (!preg_match("/^(?=\s+?\*[^\/])(.+)/", $line, $matches)) {
-                continue;
-            }
-
-            $info = $matches[1];
-            $info = trim($info);
-            $info = preg_replace("/^(\*\s+?)/", "", $info);
-
-            if ("@Enum" === trim($info)) {
+        foreach ($attributes as $attribute) {
+            if (self::class === $attribute->getName()) {
                 return true;
             }
         }
