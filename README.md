@@ -1,7 +1,7 @@
 # php-enum
 
 [![<nilay-jp>](https://circleci.com/gh/nilay-jp/php-enum.svg?style=shield)](<https://circleci.com/gh/nilay-jp/php-enum>)
-[![<test>](https://github.com/nilay-jp/php-enum/workflows/test/badge.svg?branch=master)](<https://github.com/nilay-jp/php-enum/actions>)
+[![<test>](https://github.com/nilay-jp/php-enum/workflows/test/badge.svg?branch=2.x)](<https://github.com/nilay-jp/php-enum/actions>)
 
 Enum implementation for PHP.
 
@@ -39,19 +39,13 @@ use jp\nilay\enum\Enum;
 
 class Height extends Enum
 {
-    /**
-     * @Enum
-     */
+    #[Enum]
     public static function HIGH(): Height { return new static(); }
 
-    /**
-     * @Enum
-     */
+    #[Enum]
     public static function MEDIUM(): Height { return new static(); }
 
-    /**
-     * @Enum
-     */
+    #[Enum]
     public static function LOW(): Height { return new static(); }
 }
 ```
@@ -96,19 +90,13 @@ class Height extends Enum
         return $this->abbr;
     }
 
-    /**
-     * @Enum
-     */
+    #[Enum]
     public static function HIGH(): Height { return new static("High", "H"); }
 
-    /**
-     * @Enum
-     */
+    #[Enum]
     public static function MEDIUM(): Height { return new static("Medium", "M"); }
 
-    /**
-     * @Enum
-     */
+    #[Enum]
     public static function LOW(): Height { return new static("Low", "L"); }
 }
 ```

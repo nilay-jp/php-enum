@@ -26,25 +26,19 @@ class Height extends Enum
         return $this->abbr;
     }
 
-    /**
-     * @Enum
-     */
+    #[Enum]
     public static function HIGH(): Height
     {
         return new static("High", "H");
     }
 
-    /**
-     * @Enum
-     */
+    #[Enum]
     public static function MEDIUM(): Height
     {
         return new static("Medium", "M");
     }
 
-    /**
-     * @Enum
-     */
+    #[Enum]
     public static function LOW(): Height
     {
         return new static("Low", "L");
